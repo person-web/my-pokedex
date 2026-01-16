@@ -1,0 +1,22 @@
+
+<script>
+    const pokedex = document.getElementById('pokedex');
+
+    async function fetchKanto() {
+        for (let i = 1; i <= 151; i++) {
+            const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            
+            const card = document.createElement('div');
+            card.classList.add('pokemon-card');
+            card.innerHTML = `
+                <span class="id-number">#${i.toString().padStart(3, '0')}</span>
+                <img class="pokemon-image" src="${data.sprites.front_default}">
+                <h3 class="pokemon-name">${data.name}</h3>
+            `;
+            pokedex.appendChild(card);
+        }
+    }
+    fetchKanto();
+</script>
